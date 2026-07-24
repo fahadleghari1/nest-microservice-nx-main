@@ -1,157 +1,140 @@
-# NestjsMicroservicesWithNx
+# NestJS Microservices with Nx
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A monorepo scaffold for a NestJS-based microservices architecture, managed with [Nx](https://nx.dev). It currently contains an API gateway and two backend services, each independently runnable and testable through the Nx workspace.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Tech stack
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+**Implemented today**
 
-## Finish your CI setup
+- [Nx](https://nx.dev) monorepo (v21) — workspace orchestration, task running, and code generation
+- [NestJS](https://nestjs.com) (v11) — service framework
+- TypeScript 5.9
+- [SWC](https://swc.rs) — fast build/transpile for dev and test
+- Jest 30 — unit testing
+- ESLint 9 + Prettier — linting and formatting
+- Webpack — production builds for each service
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/LXtuf67V1V)
+**Planned / on the roadmap**
 
-
-## Generate a library
-
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
-```
-
-## Run tasks
-
-To build the library use:
-
-```sh
-npx nx build pkg1
-```
-
-To run any task with Nx use:
-
-```sh
-npx nx <target> <project-name>
-```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
-
-```
-npx nx release
-```
-
-Pass `--dry-run` to see what would happen without actually releasing the library.
-
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
-```
-
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
-
-```sh
-npx nx sync:check
-```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-
-
-
-# nestjs with nx
-
-## add plugin
-
-nx add @nx/nest
-
-
-# command to generate nestjs service in nx 
-
-nx g @nx/nest:app apps/api-gateway
-
-# command to serve any service 
- 
-nx serve api-gateway
-
-# command to run all services 
-
-nx run-many -t serve --all
-
-# command to build any service 
-
-nx build service-name
-
-# command to run test of any service
-
-nx test service-name
-
-# creating a centrilized microservices auth system
-
-three service we have created api-gateway auth-service user-service
-
-# working on api-gateway
-
-nest g co app/auth --no-spec
-
-
-
-I've created a documentation folder within the project. Inside it, you  need to tell detailed guides for each core component of the system, including:
-- Advanced Auth Service
-- User Service
-- API Gateway
-- Shared Packages (common utilities, DTOs, guards, interceptors, etc.)
-
-I'm building a scalable NestJS microservices architecture using the following technologies:
-- NX Monorepo for workspace orchestration
-- NestJS for service development
-- Prisma ORM for database interaction
+- [Prisma](https://www.prisma.io) ORM
 - PostgreSQL as the primary database
 - Redis for caching
--Apache kafka
-- Additional tools and services as needed
+- Apache Kafka for inter-service messaging
+- Centralized authentication/authorization across services
+- Shared library of common DTOs, guards, and interceptors
 
-The documentation will explain:
-- How each service communicates (e.g., via Redis pub/sub or HTTP)
-- How authentication and authorization are handled across services
-- How shared logic is abstracted into reusable packages
-- How the API Gateway routes and secures traffic
-- How to structure and scale the monorepo using NX
+## Project structure
 
-Current Status
-- NX workspace is initialized
-- NestJS services are scaffolded
-- Ready to begin implementing each module with proper architecture
+```
+apps/
+  api-gateway/         # Entry point for external traffic (port 6000)
+  api-gateway-e2e/
+  auth-service/         # Auth service (port 6001)
+  auth-service-e2e/
+  user-service/         # User service (port 6002)
+  user-service-e2e/
+packages/               # Shared/publishable libraries (empty so far)
+```
+
+## Features
+
+**Current state**
+
+- Three independently deployable NestJS apps scaffolded via Nx generators
+- Each service exposes a placeholder `GET /api` endpoint
+- E2E test projects wired up for each service
+- Shared Nx task pipeline for build, serve, lint, and test across all apps
+
+**Planned**
+
+- Auth service: user registration/login, token issuance and validation
+- User service: user profile and account management
+- API gateway: request routing and auth enforcement for downstream services
+- Inter-service communication via Kafka and/or Redis pub/sub
+- Persistent storage via Prisma + PostgreSQL
+
+## Prerequisites
+
+- Node.js 20+
+- npm
+
+## Setup
+
+```sh
+# Install dependencies
+npm install
+```
+
+## Running the services
+
+Serve a single service:
+
+```sh
+npx nx serve api-gateway
+npx nx serve auth-service
+npx nx serve user-service
+```
+
+Serve all services at once:
+
+```sh
+npx nx run-many -t serve --all
+```
+
+Default ports (each prefixed with `/api`):
+
+| Service       | Port | URL                          |
+| ------------- | ---- | ----------------------------- |
+| api-gateway   | 6000 | http://localhost:6000/api     |
+| auth-service  | 6001 | http://localhost:6001/api     |
+| user-service  | 6002 | http://localhost:6002/api     |
+
+## Building
+
+```sh
+npx nx build <project-name>
+```
+
+## Testing
+
+```sh
+# Unit tests for a single project
+npx nx test <project-name>
+
+# Unit tests for all projects
+npx nx run-many -t test --all
+
+# End-to-end tests
+npx nx e2e api-gateway-e2e
+npx nx e2e auth-service-e2e
+npx nx e2e user-service-e2e
+```
+
+## Linting
+
+```sh
+npx nx lint <project-name>
+```
+
+## Generating new code
+
+Generate a new app:
+
+```sh
+npx nx g @nx/nest:app apps/<service-name>
+```
+
+Generate a shared library:
+
+```sh
+npx nx g @nx/js:lib packages/<lib-name>
+```
+
+## Screenshots
+
+_Coming soon — screenshots will be added once the API gateway and services have real endpoints and/or Swagger docs to show._
+
+## Learn more
+
+- [Nx documentation](https://nx.dev)
+- [NestJS documentation](https://docs.nestjs.com)
